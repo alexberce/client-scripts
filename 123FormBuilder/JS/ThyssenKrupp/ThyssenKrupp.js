@@ -7,22 +7,22 @@ jQuery(document).ready(function(){
     calculateAndUpdateHours();
     calculateAndUpdateExpenses();
     calculateAndUpdateNightRatePayment();
+
+    //Hours Worked Event
+    jQuery('[data-id="50640466"] [data-role="i123-input"]').on('input', () => {
+      calculateAndUpdateHours();
+    });
+
+    // Expenses
+    jQuery('[data-id="50640467"] [data-role="i123-input"]').on('input', () => {
+      calculateAndUpdateExpenses();
+    });
+
+    // Expenses
+    jQuery('[data-id="50640562"] [data-role="i123-input"]').on('input', () => {
+      calculateAndUpdateNightRatePayment();
+    });
   }, 10);
-
-  //Hours Worked Event
-  jQuery('[data-id="50640466"] [data-role="i123-input"]').on('input', () => {
-    calculateAndUpdateHours();
-  });
-
-  // Expenses
-  jQuery('[data-id="50640467"] [data-role="i123-input"]').on('input', () => {
-    calculateAndUpdateExpenses();
-  });
-
-  // Expenses
-  jQuery('[data-id="50640562"] [data-role="i123-input"]').on('input', () => {
-    calculateAndUpdateNightRatePayment();
-  });
 
   function calculateAndUpdateHours(){
     let totalHours = 0, totalMinutes = 0;
