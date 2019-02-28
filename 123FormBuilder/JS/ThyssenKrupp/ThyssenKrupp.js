@@ -1,5 +1,7 @@
 jQuery(document).ready(function(){
   setTimeout(() => {
+    jQuery('[data-id="50640386"] table').attr('cellspacing', '0');
+    
     for(let i=0; i < 10; i++){
       jQuery("[data-role='add-group-button']").click();
     }
