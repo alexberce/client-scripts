@@ -4,7 +4,7 @@ jQuery(document).ready(function(){
       jQuery("[data-role='add-group-button']").click();
     }
 
-    jQuery('[data-id="50640386"] table').attr('cellspacing', '0');
+    jQuery('[data-id="50640386"] table').eq(0).attr('cellspacing', '0px');
 
     calculateAndUpdateHours();
     calculateAndUpdateExpenses();
