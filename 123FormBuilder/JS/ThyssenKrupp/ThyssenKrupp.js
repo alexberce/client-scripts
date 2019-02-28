@@ -1,30 +1,37 @@
-jQuery(document).ready(function(){
-  setTimeout(() => {
-    for(let i=0; i < 10; i++){
-      jQuery("[data-role='add-group-button']").click();
-    }
+(function(){ 
+  
+  calculateAndUpdateHours();
+  calculateAndUpdateExpenses();
+  calculateAndUpdateNightRatePayment();
 
-    jQuery('[data-id="50640386"] table').eq(0).attr('cellspacing', '0px');
+  jQuery(document).ready(function(){
+    setTimeout(() => {
+      for(let i=0; i < 10; i++){
+        jQuery("[data-role='add-group-button']").click();
+      }
 
-    calculateAndUpdateHours();
-    calculateAndUpdateExpenses();
-    calculateAndUpdateNightRatePayment();
+      jQuery('[data-id="50640386"] table').eq(0).attr('cellspacing', '0px');
 
-    //Hours Worked Event
-    jQuery('[data-id="50640466"] [data-role="i123-input"]').on('input', () => {
       calculateAndUpdateHours();
-    });
-
-    // Expenses
-    jQuery('[data-id="50640467"] [data-role="i123-input"]').on('input', () => {
       calculateAndUpdateExpenses();
-    });
-
-    // Expenses
-    jQuery('[data-id="50640562"] [data-role="i123-input"]').on('input', () => {
       calculateAndUpdateNightRatePayment();
-    });
-  }, 10);
+
+      //Hours Worked Event
+      jQuery('[data-id="50640466"] [data-role="i123-input"]').on('input', () => {
+        calculateAndUpdateHours();
+      });
+
+      // Expenses
+      jQuery('[data-id="50640467"] [data-role="i123-input"]').on('input', () => {
+        calculateAndUpdateExpenses();
+      });
+
+      // Expenses
+      jQuery('[data-id="50640562"] [data-role="i123-input"]').on('input', () => {
+        calculateAndUpdateNightRatePayment();
+      });
+    }, 10);
+  });
 
   function calculateAndUpdateHours(){
     let totalHours = 0, totalMinutes = 0;
@@ -89,4 +96,5 @@ jQuery(document).ready(function(){
         break;      
     }
   }
-});
+
+})();
