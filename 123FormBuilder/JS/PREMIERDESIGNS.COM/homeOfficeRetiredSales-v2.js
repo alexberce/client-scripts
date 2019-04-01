@@ -14,8 +14,7 @@
         emailHash = '00000010',
         phoneHash = '00000012',
 
-        urlFieldId = 34743181,
-        multiplierFieldId = 34743176;
+        urlFieldId = 34743181;
 
     window.addEventListener('load', function(){
         loader.engine.on('theme-ready', function() {
@@ -151,7 +150,7 @@
             if(result['success']){
                 console.log('JRC success');
                 HideErrorMessage();
-                updateDataNeededForPaymentEmail(urlFieldId, multiplierFieldId);
+                updateDataNeededForPaymentEmail(urlFieldId);
             }
             else{
                 console.log('Failed');
@@ -251,7 +250,7 @@
 		$("div[data-role='page-footer'] div[data-type='payments-selector']").hide();
     }
     
-    function updateDataNeededForPaymentEmail(urlFieldId, multiplierFieldId){
+    function updateDataNeededForPaymentEmail(urlFieldId){
         try {
             var sessionId = loader.getSessionId();
             var formId = loader.getFormId();

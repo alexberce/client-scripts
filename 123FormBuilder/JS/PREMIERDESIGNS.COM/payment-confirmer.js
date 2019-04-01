@@ -1,5 +1,4 @@
-let urlFieldId = 34743181,
-    multiplierFieldId = 34743176;
+let urlFieldId = 34743181;
 
 function updateDataNeededForPaymentEmail(){
     try {
@@ -17,6 +16,6 @@ function updateDataNeededForPaymentEmail(){
 
 (function(){
     jQuery(document).ready(function(){
-        updateDataNeededForPaymentEmail(urlFieldId, multiplierFieldId);
+        updateDataNeededForPaymentEmail(urlFieldId);
     });
 })();

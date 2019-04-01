@@ -14,8 +14,7 @@
         emailHash = '00000010',
         phoneHash = '00000011',
 
-        urlFieldId = 34743181,
-        multiplierFieldId = 34743176;
+        urlFieldId = 34743181;
 
 
     window.addEventListener('load', function(){
@@ -149,7 +148,7 @@
             if(result['success']){
                 console.log('JRC success');
                 HideErrorMessage();
-                updateDataNeededForPaymentEmail(urlFieldId, multiplierFieldId);
+                updateDataNeededForPaymentEmail(urlFieldId);
             }
             else{
                 console.log('Failed');
@@ -241,7 +240,7 @@
         return re.test(String(email).toLowerCase());
     }
 
-    function updateDataNeededForPaymentEmail(urlFieldId, multiplierFieldId){
+    function updateDataNeededForPaymentEmail(urlFieldId){
         try {
             var sessionId = loader.getSessionId();
             var formId = loader.getFormId();
@@ -249,7 +248,7 @@
             var paymentConfirmationURL = rootDomain + '/sf.php?s=' + sessionId + '-' + formId + '&action=paymentsent&paymsel=15&tobepaid=0&mode=email';
     
             loader.getDOMAbstractionLayer().setControlValueById(String(urlFieldId), paymentConfirmationURL);
-            loader.getDOMAbstractionLayer().setControlValueById(String(multiplierFieldId), String(0));
+            // loader.getDOMAbstractionLayer().setControlValueById(String(multiplierFieldId), String(0));
         } catch (e) {
             console.warn('Payment Confirmation Error: ' + e.message);
         }
