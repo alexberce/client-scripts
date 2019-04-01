@@ -1,6 +1,6 @@
 let urlFieldId = 34743181;
 
-function updateDataNeededForPaymentEmail(){
+function updateDataNeededForPaymentEmail(urlFieldId){
     try {
         var sessionId = loader.getSessionId();
         var formId = loader.getFormId();
@@ -8,7 +8,7 @@ function updateDataNeededForPaymentEmail(){
         var paymentConfirmationURL = rootDomain + '/sf.php?s=' + sessionId + '-' + formId + '&action=paymentsent&paymsel=15&tobepaid=0&mode=email';
 
         loader.getDOMAbstractionLayer().setControlValueById(String(urlFieldId), paymentConfirmationURL);
-        loader.getDOMAbstractionLayer().setControlValueById(String(multiplierFieldId), String(0));
+        //loader.getDOMAbstractionLayer().setControlValueById(String(multiplierFieldId), String(0));
     } catch (e) {
         console.warn('Payment Confirmation Error: ' + e.message);
     }
