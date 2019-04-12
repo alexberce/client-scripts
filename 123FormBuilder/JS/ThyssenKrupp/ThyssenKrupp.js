@@ -27,7 +27,7 @@
       //   }, i * 25);
       // }
 
-      loader.getDOMAbstractionLayer().setControlValueById(String(hoursFieldId), "", new Array(numberOfRowsToAdd).fill(''));
+      loader.getDOMAbstractionLayer().setControlValueById(String(hoursFieldId), "", new Array(numberOfRowsToAdd - 1).fill(''));
 
       jQuery('[data-id="' + topHTMLBlockFieldId + '"] table').eq(0).attr('cellspacing', '0px');
 
