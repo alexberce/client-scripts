@@ -165,7 +165,8 @@
     var d2 = new Date(0, 0, 0, s[0], s[1]);
 
     if (d2 <= d1) {
-        d2.setDate(d2.getDate() + 1);
+        //d2.setDate(d2.getDate() + 1);
+        return 'Error';
     }
 
     var ms = ( d2.getTime() - d1.getTime() );
