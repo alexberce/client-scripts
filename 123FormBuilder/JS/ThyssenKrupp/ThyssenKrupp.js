@@ -58,13 +58,18 @@
   function calculateAndUpdateHoursWorked(){
     for(var repeatedIndex = 0; repeatedIndex < numberOfRowsToAdd; repeatedIndex++){
       try {
-        let rowStartTimeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(startTimeFieldId, repeatedIndex);
-        let rowFinishTimeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(finishTimeFieldId, repeatedIndex);
-        
-        let rowHoursWorkedField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(hoursFieldId, repeatedIndex);
-        let value = rowStartTimeField.getStringValue() + ' - ' + rowFinishTimeField.getStringValue();
+        let rowStartTimeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(startTimeFieldId, repeatedIndex),
+        rowFinishTimeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(finishTimeFieldId, repeatedIndex),
+        rowHoursWorkedField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(hoursFieldId, repeatedIndex);
+
+        let startTime = rowStartTimeField.getStringValue() || '',
+            finishTime = rowFinishTimeField.getStringValue() || '';
+
+        if(startTime.length && finishTime.length){
+          let value = startTime + ' - ' + finishTime;
   
-        loader.getDOMAbstractionLayer().setControlValueById(String(hoursFieldId), value, null, repeatedIndex + 1);
+          loader.getDOMAbstractionLayer().setControlValueById(String(hoursFieldId), value, null, repeatedIndex + 1);
+        }
       } catch (e) {
   
       }
