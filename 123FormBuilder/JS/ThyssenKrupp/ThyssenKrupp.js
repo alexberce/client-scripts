@@ -24,7 +24,7 @@
       for(let i=0; i < numberOfRowsToAdd; i++){
         setTimeout(() => {
           jQuery("[data-role='add-group-button']").click();
-        }, i * 15);
+        }, i * 25);
       }
 
       jQuery('[data-id="' + topHTMLBlockFieldId + '"] table').eq(0).attr('cellspacing', '0px');
