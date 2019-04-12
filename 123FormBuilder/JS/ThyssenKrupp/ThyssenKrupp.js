@@ -1,6 +1,10 @@
 (function(){ 
   
-  var hoursFieldId = 50640466,
+  var 
+      startTimeFieldId = 52566737,
+      finishTimeFieldId = 52566732,      
+
+      hoursFieldId = 50640466,
       expensesFieldId = 50640467,
       nightRatePaymentFieldId = 50640562,
 
@@ -23,13 +27,13 @@
 
       jQuery('[data-id="' + topHTMLBlockFieldId + '"] table').eq(0).attr('cellspacing', '0px');
 
-      calculateAndUpdateHours();
+      calculateAndUpdateTotalHours();
       calculateAndUpdateExpenses();
       calculateAndUpdateNightRatePayment();
 
       //Hours Worked Event
       jQuery('[data-id="' + hoursFieldId + '"] [data-role="i123-input"]').on('input', () => {
-        calculateAndUpdateHours();
+        calculateAndUpdateTotalHours();
       });
 
       // Expenses
@@ -41,10 +45,25 @@
       jQuery('[data-id="' + nightRatePaymentFieldId + '"] [data-role="i123-input"]').on('input', () => {
         calculateAndUpdateNightRatePayment();
       });
+
+      setInterval(() => { calculateAndUpdateHoursWorked() }, 100);
+
     }, 10);
   });
+  
+  function calculateAndUpdateHoursWorked(){
+    for(var repeatedIndex = 0; repeatedIndex < numberOfRowsToAdd; repeatedIndex++){
 
-  function calculateAndUpdateHours(){
+      let rowStartTimeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(startTimeFieldId, repeatedIndex);
+      let rowFinishTimeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(finishTimeFieldId, repeatedIndex);
+      
+      let rowHoursWorkedField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(hoursFieldId, repeatedIndex);
+
+      rowHoursWorkedField.setValue(rowStartTimeField.getStringValue() + ' - ' + rowFinishTimeField.getStringValue());
+    }
+  }
+
+  function calculateAndUpdateTotalHours(){
     let totalHours = 0, totalMinutes = 0;
 
     jQuery('[data-id="' + hoursFieldId + '"] [data-role="i123-input"]').each((index, item) => {
