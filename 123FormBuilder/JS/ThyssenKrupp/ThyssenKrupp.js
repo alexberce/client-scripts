@@ -5,7 +5,10 @@
       nightRatePaymentFieldId = 50640562,
 
       topHTMLBlockFieldId = 50640386,
-      bottomHTMLBlockFieldId = 51000589;
+      bottomHTMLBlockFieldId = 51000589,
+      
+      numberOfRowsToAdd = 20
+      ;
 
 
   calculateAndUpdateHours();
@@ -14,7 +17,7 @@
 
   jQuery(document).ready(function(){
     setTimeout(() => {
-      for(let i=0; i < 30; i++){
+      for(let i=0; i < numberOfRowsToAdd; i++){
         jQuery("[data-role='add-group-button']").click();
       }
 
