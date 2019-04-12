@@ -22,7 +22,9 @@
   jQuery(document).ready(function(){
     setTimeout(() => {
       for(let i=0; i < numberOfRowsToAdd; i++){
-        jQuery("[data-role='add-group-button']").click();
+        setTimeout(() => {
+          jQuery("[data-role='add-group-button']").click();
+        }, 1);
       }
 
       jQuery('[data-id="' + topHTMLBlockFieldId + '"] table').eq(0).attr('cellspacing', '0px');
