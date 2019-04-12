@@ -21,11 +21,13 @@
 
   jQuery(document).ready(function(){
     setTimeout(() => {
-      for(let i=0; i < numberOfRowsToAdd; i++){
-        setTimeout(() => {
-          jQuery("[data-role='add-group-button']").click();
-        }, i * 25);
-      }
+      // for(let i=0; i < numberOfRowsToAdd; i++){
+      //   setTimeout(() => {
+      //     jQuery("[data-role='add-group-button']").click();
+      //   }, i * 25);
+      // }
+
+      loader.getDOMAbstractionLayer().setControlValueById(String(hoursFieldId), value, ["","","","","","",""]);
 
       jQuery('[data-id="' + topHTMLBlockFieldId + '"] table').eq(0).attr('cellspacing', '0px');
 
