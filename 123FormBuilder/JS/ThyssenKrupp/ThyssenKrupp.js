@@ -58,8 +58,9 @@
       let rowFinishTimeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(finishTimeFieldId, repeatedIndex);
       
       let rowHoursWorkedField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(hoursFieldId, repeatedIndex);
+      let value = rowStartTimeField.getStringValue() + ' - ' + rowFinishTimeField.getStringValue();
 
-      rowHoursWorkedField.setValue(rowStartTimeField.getStringValue() + ' - ' + rowFinishTimeField.getStringValue());
+      loader.getDOMAbstractionLayer().setControlValueById(hoursFieldId, value, null, repeatedIndex + 1);
     }
   }
 
