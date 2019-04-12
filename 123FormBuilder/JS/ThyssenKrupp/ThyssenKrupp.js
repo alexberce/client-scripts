@@ -1,33 +1,41 @@
 (function(){ 
   
+  var hoursFieldId = 50640466,
+      expensesFieldId = 50640467,
+      nightRatePaymentFieldId = 50640562,
+
+      topHTMLBlockFieldId = 50640386,
+      bottomHTMLBlockFieldId = 51000589;
+
+
   calculateAndUpdateHours();
   calculateAndUpdateExpenses();
   calculateAndUpdateNightRatePayment();
 
   jQuery(document).ready(function(){
     setTimeout(() => {
-      for(let i=0; i < 10; i++){
+      for(let i=0; i < 30; i++){
         jQuery("[data-role='add-group-button']").click();
       }
 
-      jQuery('[data-id="50640386"] table').eq(0).attr('cellspacing', '0px');
+      jQuery('[data-id="' + topHTMLBlockFieldId + '"] table').eq(0).attr('cellspacing', '0px');
 
       calculateAndUpdateHours();
       calculateAndUpdateExpenses();
       calculateAndUpdateNightRatePayment();
 
       //Hours Worked Event
-      jQuery('[data-id="50640466"] [data-role="i123-input"]').on('input', () => {
+      jQuery('[data-id="' + hoursFieldId + '"] [data-role="i123-input"]').on('input', () => {
         calculateAndUpdateHours();
       });
 
       // Expenses
-      jQuery('[data-id="50640467"] [data-role="i123-input"]').on('input', () => {
+      jQuery('[data-id="' + expensesFieldId + '"] [data-role="i123-input"]').on('input', () => {
         calculateAndUpdateExpenses();
       });
 
-      // Expenses
-      jQuery('[data-id="50640562"] [data-role="i123-input"]').on('input', () => {
+      // NightRatePayment
+      jQuery('[data-id="' + nightRatePaymentFieldId + '"] [data-role="i123-input"]').on('input', () => {
         calculateAndUpdateNightRatePayment();
       });
     }, 10);
@@ -36,7 +44,7 @@
   function calculateAndUpdateHours(){
     let totalHours = 0, totalMinutes = 0;
 
-    jQuery('[data-id="50640466"] [data-role="i123-input"]').each((index, item) => {
+    jQuery('[data-id="' + hoursFieldId + '"] [data-role="i123-input"]').each((index, item) => {
       let value = jQuery(item).val(),
         valueSplit = value.split(':'),
         hours = Number(valueSplit[0]) || 0,
@@ -52,19 +60,19 @@
     totalHours += ~~(minutesToHours);
     totalMinutes = minutesLeft;
 
-    jQuery('[data-id="51000589"] td:nth-child(2) span').text(String(zeroPad(totalHours, 2)) + ':' + String(zeroPad(totalMinutes, 2)));
+    jQuery('[data-id="' + bottomHTMLBlockFieldId + '"] td:nth-child(2) span').text(String(zeroPad(totalHours, 2)) + ':' + String(zeroPad(totalMinutes, 2)));
   }
 
   function calculateAndUpdateExpenses(){
     let valueArray = priceCalculator(50640467);
 
-    jQuery('[data-id="51000589"] td:nth-child(3) span').text(String(zeroPad(valueArray[0], 3)) + '.' + String(zeroPad(valueArray[1], 2, 'after')));
+    jQuery('[data-id="' + bottomHTMLBlockFieldId + '"] td:nth-child(3) span').text(String(zeroPad(valueArray[0], 3)) + '.' + String(zeroPad(valueArray[1], 2, 'after')));
   }
 
   function calculateAndUpdateNightRatePayment(){
     let valueArray = priceCalculator(50640562);
 
-    jQuery('[data-id="51000589"] td:nth-child(6) span').text(String(zeroPad(valueArray[0], 3)) + '.' + String(zeroPad(valueArray[1], 2, 'after')));
+    jQuery('[data-id="' + bottomHTMLBlockFieldId + '"] td:nth-child(6) span').text(String(zeroPad(valueArray[0], 3)) + '.' + String(zeroPad(valueArray[1], 2, 'after')));
   }
 
   function priceCalculator(fieldId){
