@@ -60,7 +60,7 @@
       let rowHoursWorkedField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(hoursFieldId, repeatedIndex);
       let value = rowStartTimeField.getStringValue() + ' - ' + rowFinishTimeField.getStringValue();
 
-      loader.getDOMAbstractionLayer().setControlValueById(hoursFieldId, value, null, repeatedIndex + 1);
+      loader.getDOMAbstractionLayer().setControlValueById(String(hoursFieldId), value, null, repeatedIndex + 1);
     }
   }
 
