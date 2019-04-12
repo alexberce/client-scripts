@@ -70,6 +70,8 @@
   
           loader.getDOMAbstractionLayer().setControlValueById(String(hoursFieldId), value, null, repeatedIndex + 1);
         }
+
+        calculateAndUpdateTotalHours();
       } catch (e) {
   
       }
