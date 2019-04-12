@@ -15,7 +15,7 @@
       ;
 
 
-  calculateAndUpdateHours();
+  calculateAndUpdateTotalHours();
   calculateAndUpdateExpenses();
   calculateAndUpdateNightRatePayment();
 
