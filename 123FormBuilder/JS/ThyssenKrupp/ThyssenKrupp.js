@@ -66,7 +66,7 @@
             finishTime = rowFinishTimeField.getStringValue() || '';
 
         if(startTime.length && finishTime.length){
-          let value = startTime + ' - ' + finishTime;
+          let value = timeDifference(startTime, finishTime);
   
           loader.getDOMAbstractionLayer().setControlValueById(String(hoursFieldId), value, null, repeatedIndex + 1);
         }
@@ -139,5 +139,45 @@
         break;      
     }
   }
+
+  function timeDifference(start, end) {
+    var hh, mm, ss;
+
+    var startTimeArray = start.split(' ');
+    var endTimeArray = end.split(' ');
+    
+    var startTimeString = startTimeArray[0];
+    var endTimeString = endTimeArray[0];
+
+    var s = endTimeString.split(':');
+    if(endTimeArray[1].indexOf('PM') !== -1 && parseInt(s[0]) !== 12){
+      s[0] = parseInt(s[0]) + 12;
+    }
+
+    var e = startTimeString.split(':');
+    if(startTimeArray[1].indexOf('PM') !== -1 && parseInt(e[0]) !== 12){
+      e[0] = parseInt(e[0]) + 12;
+    }
+
+    var d1 = new Date(0, 0, 0, e[0], e[1]);
+    var d2 = new Date(0, 0, 0, s[0], s[1]);
+
+    if (d2 <= d1) {
+        d2.setDate(d2.getDate() + 1);
+    }
+
+    var ms = ( d2.getTime() - d1.getTime() );
+
+    ss = Math.floor( ms/1000 );
+    mm = Math.floor( ss/60 );
+    hh = Math.floor( mm/60 );
+    mm = mm % 60;
+
+    if ( isNaN(hh) == true || isNaN(mm) == true) {
+        return ('');
+    } else {
+        return (('0' + hh).slice(-2) + ':' + ('0' + mm).slice(-2));
+    }
+}
 
 })();
