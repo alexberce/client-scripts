@@ -24,7 +24,7 @@
       for(let i=0; i < numberOfRowsToAdd; i++){
         setTimeout(() => {
           jQuery("[data-role='add-group-button']").click();
-        }, 5);
+        }, 10);
       }
 
       jQuery('[data-id="' + topHTMLBlockFieldId + '"] table').eq(0).attr('cellspacing', '0px');
@@ -55,14 +55,17 @@
   
   function calculateAndUpdateHoursWorked(){
     for(var repeatedIndex = 0; repeatedIndex < numberOfRowsToAdd; repeatedIndex++){
-
-      let rowStartTimeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(startTimeFieldId, repeatedIndex);
-      let rowFinishTimeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(finishTimeFieldId, repeatedIndex);
-      
-      let rowHoursWorkedField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(hoursFieldId, repeatedIndex);
-      let value = rowStartTimeField.getStringValue() + ' - ' + rowFinishTimeField.getStringValue();
-
-      loader.getDOMAbstractionLayer().setControlValueById(String(hoursFieldId), value, null, repeatedIndex + 1);
+      try {
+        let rowStartTimeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(startTimeFieldId, repeatedIndex);
+        let rowFinishTimeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(finishTimeFieldId, repeatedIndex);
+        
+        let rowHoursWorkedField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(hoursFieldId, repeatedIndex);
+        let value = rowStartTimeField.getStringValue() + ' - ' + rowFinishTimeField.getStringValue();
+  
+        loader.getDOMAbstractionLayer().setControlValueById(String(hoursFieldId), value, null, repeatedIndex + 1);
+      } catch (e) {
+  
+      }
     }
   }
 
