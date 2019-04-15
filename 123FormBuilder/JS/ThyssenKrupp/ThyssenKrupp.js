@@ -50,8 +50,8 @@
         calculateAndUpdateNightRatePayment();
       });
 
-      setInterval(() => { calculateAndUpdateHoursWorked() }, 100);
-      setInterval(() => { calculateAndUpdateExpenses() }, 100);
+      setInterval(() => { calculateAndUpdateHoursWorked() }, 1000);
+      setInterval(() => { calculateAndUpdateExpenses() }, 1000);
 
     }, 10);
   });
@@ -72,9 +72,9 @@
   
                 loader.getDOMAbstractionLayer().setControlValueById(String(administrationCodesFieldId), code, null);
                 let value = administrationCodePrice.getValue()['value'] || '';
-
-                console.log('value');
     
+                debugger;
+
                 loader.getDOMAbstractionLayer().setControlValueById(String(expensesPoundsField), value, null, repeatedIndex + 1);
           }
         }
