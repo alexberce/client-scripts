@@ -32,7 +32,7 @@
 
 
   calculateAndUpdateTotalHours();
-  calculateAndUpdateExpenses();
+  calculateAndUpdateTotalExpenses();
   calculateAndUpdateNightRatePayment();
 
   jQuery(document).ready(function(){
@@ -42,7 +42,7 @@
       jQuery('[data-id="' + topHTMLBlockFieldId + '"] table').eq(0).attr('cellspacing', '0px');
 
       calculateAndUpdateTotalHours();
-      calculateAndUpdateExpenses();
+      calculateAndUpdateTotalExpenses();
       calculateAndUpdateNightRatePayment();
 
       //Hours Worked Event
@@ -141,7 +141,7 @@
     jQuery('[data-id="' + bottomHTMLBlockFieldId + '"] td:nth-child(2) span').text(String(zeroPad(totalHours, 2)) + ':' + String(zeroPad(totalMinutes, 2)));
   }
 
-  function calculateAndUpdateExpenses(){
+  function calculateAndUpdateTotalExpenses(){
     let valueArray = priceCalculator(50640467);
 
     jQuery('[data-id="' + bottomHTMLBlockFieldId + '"] td:nth-child(3) span').text(String(zeroPad(valueArray[0], 3)) + '.' + String(zeroPad(valueArray[1], 2, 'after')));
