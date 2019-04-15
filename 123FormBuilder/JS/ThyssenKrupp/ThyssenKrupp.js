@@ -62,7 +62,7 @@
       try {
         let expensesCodeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(expensesCodeFieldId, repeatedIndex),
         expensesPoundsField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(expensesPoundsFieldId, repeatedIndex);
-
+        debugger;
         let code = expensesCodeField.getStringValue() || '';
 
         if(code.length){
