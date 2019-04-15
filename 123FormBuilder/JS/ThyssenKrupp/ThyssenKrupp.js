@@ -64,8 +64,7 @@
         expensesPoundsField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(expensesPoundsFieldId, repeatedIndex);
 
         if(typeof expensesCodeField !== 'undefined' && typeof expensesPoundsField !== 'undefined'){
-          debugger;
-          let code = expensesCodeField.getStringValue() || '';
+          let code = expensesCodeField.getValue()['value'] || '';
 
           if(code.length){
             let administrationCodesField = loader.getEngine().getDocument().getForm().getElementById(administrationCodesFieldId),
