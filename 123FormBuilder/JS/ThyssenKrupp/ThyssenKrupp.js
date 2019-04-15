@@ -45,11 +45,6 @@
       calculateAndUpdateTotalExpenses();
       calculateAndUpdateNightRatePayment();
 
-      //Hours Worked Event
-      jQuery('[data-id="' + hoursWorkedFieldId + '"] [data-role="i123-input"]').on('input', () => {
-        calculateAndUpdateTotalHours();
-      });
-
       // NightRatePayment
       jQuery('[data-id="' + nightRatePaymentFieldId + '"] [data-role="i123-input"]').on('input', () => {
         calculateAndUpdateNightRatePayment();
