@@ -62,17 +62,19 @@
       try {
         let expensesCodeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(expensesCodeFieldId, repeatedIndex),
         expensesPoundsField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(expensesPoundsFieldId, repeatedIndex);
-        debugger;
-        let code = expensesCodeField.getStringValue() || '';
 
-        if(code.length){
-          let administrationCodesField = loader.getEngine().getDocument().getForm().getElementById(administrationCodesFieldId),
-              administrationCodePrice = loader.getEngine().getDocument().getForm().getElementById(administrationCodePriceFieldId);
+        if(null !== expensesCodeField && null !== expensesPoundsField){
+          let code = expensesCodeField.getStringValue() || '';
 
-              loader.getDOMAbstractionLayer().setControlValueById(String(administrationCodesFieldId), code, null);
-              let value = administrationCodePrice.getValue()['value'] || '';
+          if(code.length){
+            let administrationCodesField = loader.getEngine().getDocument().getForm().getElementById(administrationCodesFieldId),
+                administrationCodePrice = loader.getEngine().getDocument().getForm().getElementById(administrationCodePriceFieldId);
   
-              loader.getDOMAbstractionLayer().setControlValueById(String(expensesPoundsField), value, null, repeatedIndex + 1);
+                loader.getDOMAbstractionLayer().setControlValueById(String(administrationCodesFieldId), code, null);
+                let value = administrationCodePrice.getValue()['value'] || '';
+    
+                loader.getDOMAbstractionLayer().setControlValueById(String(expensesPoundsField), value, null, repeatedIndex + 1);
+          }
         }
 
         calculateAndUpdateTotalExpenses();
