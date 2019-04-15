@@ -88,7 +88,7 @@
               console.log('getting price: ' , value);
         }
 
-        calculateAndUpdateTotalHours();
+        calculateAndUpdateTotalExpenses();
       } catch (e) {
   
       }
