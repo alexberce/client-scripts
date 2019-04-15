@@ -80,7 +80,7 @@
 
         calculateAndUpdateTotalExpenses();
       } catch (e) {
-  
+          console.log('Expenses calculator error: ' + e.message);
       }
     }
 
