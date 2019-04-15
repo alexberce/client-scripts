@@ -50,11 +50,6 @@
         calculateAndUpdateTotalHours();
       });
 
-      // Expenses
-      jQuery('[data-id="' + expensesPoundsFieldId + '"] [data-role="i123-input"]').on('input', () => {
-        calculateAndUpdateExpenses();
-      });
-
       // NightRatePayment
       jQuery('[data-id="' + nightRatePaymentFieldId + '"] [data-role="i123-input"]').on('input', () => {
         calculateAndUpdateNightRatePayment();
