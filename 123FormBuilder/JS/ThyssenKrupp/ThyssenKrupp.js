@@ -4,12 +4,28 @@
       startTimeFieldId = 52566737,
       finishTimeFieldId = 52566732,      
 
-      hoursFieldId = 50640466,
-      expensesFieldId = 50640467,
+      hoursWorkedFieldId = 50640466,
+      expensesPoundsFieldId = 50640467,
+      expensesCodeFieldId = 50640538,
+      radiusMilesFieldId = 50640543,
       nightRatePaymentFieldId = 50640562,
+
+      /**
+       * HTML Block Fields
+       */
 
       topHTMLBlockFieldId = 50640386,
       bottomHTMLBlockFieldId = 51000589,
+
+      /**
+       * Utility Fields
+       */
+      mileageRateFieldId = 52642922,
+
+      mileageRateFieldId = 52642922,
+      nightRatePaymentMultiplierFieldId = 52643593,
+      administrationCodesFieldId = 52643094,
+      administrationCodePriceFieldId = 52643832,
       
       numberOfRowsToAdd = 20
       ;
@@ -21,13 +37,7 @@
 
   jQuery(document).ready(function(){
     setTimeout(() => {
-      // for(let i=0; i < numberOfRowsToAdd; i++){
-      //   setTimeout(() => {
-      //     jQuery("[data-role='add-group-button']").click();
-      //   }, i * 25);
-      // }
-
-      loader.getDOMAbstractionLayer().setControlValueById(String(hoursFieldId), "", new Array(numberOfRowsToAdd - 1).fill(''));
+      loader.getDOMAbstractionLayer().setControlValueById(String(hoursWorkedFieldId), "", new Array(numberOfRowsToAdd - 1).fill(''));
 
       jQuery('[data-id="' + topHTMLBlockFieldId + '"] table').eq(0).attr('cellspacing', '0px');
 
@@ -36,7 +46,7 @@
       calculateAndUpdateNightRatePayment();
 
       //Hours Worked Event
-      jQuery('[data-id="' + hoursFieldId + '"] [data-role="i123-input"]').on('input', () => {
+      jQuery('[data-id="' + hoursWorkedFieldId + '"] [data-role="i123-input"]').on('input', () => {
         calculateAndUpdateTotalHours();
       });
 
@@ -51,16 +61,44 @@
       });
 
       setInterval(() => { calculateAndUpdateHoursWorked() }, 100);
+      setInterval(() => { calculateAndUpdateExpenses() }, 100);
 
     }, 10);
   });
   
+  function calculateAndUpdateExpenses(){
+
+    for(var repeatedIndex = 0; repeatedIndex < numberOfRowsToAdd; repeatedIndex++){
+      try {
+        let expensesCodeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(expensesCodeFieldId, repeatedIndex),
+        expensesPoundsFiel = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(expensesPoundsFieldId, repeatedIndex);
+
+        let code = expensesCodeField.getStringValue() || '';
+
+        if(code.length){
+          let administrationCodesField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(administrationCodesFieldId),
+              administrationCodePrice = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(administrationCodePriceFieldId);
+
+              loader.getDOMAbstractionLayer().setControlValueById(String(hoursWorkedFieldId), code, null);
+              let value = administrationCodePrice.getStringValue() || '';
+  
+              loader.getDOMAbstractionLayer().setControlValueById(String(administrationCodePriceFieldId), value, null, repeatedIndex + 1);
+        }
+
+        calculateAndUpdateTotalHours();
+      } catch (e) {
+  
+      }
+    }
+
+  }
+
   function calculateAndUpdateHoursWorked(){
     for(var repeatedIndex = 0; repeatedIndex < numberOfRowsToAdd; repeatedIndex++){
       try {
         let rowStartTimeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(startTimeFieldId, repeatedIndex),
         rowFinishTimeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(finishTimeFieldId, repeatedIndex),
-        rowHoursWorkedField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(hoursFieldId, repeatedIndex);
+        rowHoursWorkedField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(hoursWorkedFieldId, repeatedIndex);
 
         let startTime = rowStartTimeField.getStringValue() || '',
             finishTime = rowFinishTimeField.getStringValue() || '';
@@ -68,7 +106,7 @@
         if(startTime.length && finishTime.length){
           let value = timeDifference(startTime, finishTime);
   
-          loader.getDOMAbstractionLayer().setControlValueById(String(hoursFieldId), value, null, repeatedIndex + 1);
+          loader.getDOMAbstractionLayer().setControlValueById(String(hoursWorkedFieldId), value, null, repeatedIndex + 1);
         }
 
         calculateAndUpdateTotalHours();
@@ -81,7 +119,7 @@
   function calculateAndUpdateTotalHours(){
     let totalHours = 0, totalMinutes = 0;
 
-    jQuery('[data-id="' + hoursFieldId + '"] [data-role="i123-input"]').each((index, item) => {
+    jQuery('[data-id="' + hoursWorkedFieldId + '"] [data-role="i123-input"]').each((index, item) => {
       let value = jQuery(item).val(),
         valueSplit = value.split(':'),
         hours = Number(valueSplit[0]) || 0,
