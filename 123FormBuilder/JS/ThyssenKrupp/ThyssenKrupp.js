@@ -51,7 +51,7 @@
       });
 
       // Expenses
-      jQuery('[data-id="' + expensesFieldId + '"] [data-role="i123-input"]').on('input', () => {
+      jQuery('[data-id="' + expensesPoundsFieldId + '"] [data-role="i123-input"]').on('input', () => {
         calculateAndUpdateExpenses();
       });
 
