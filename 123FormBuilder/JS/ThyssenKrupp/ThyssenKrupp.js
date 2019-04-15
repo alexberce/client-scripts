@@ -72,10 +72,8 @@
   
                 loader.getDOMAbstractionLayer().setControlValueById(String(administrationCodesFieldId), code, null);
                 let value = administrationCodePrice.getValue()['value'] || '';
-    
-                debugger;
 
-                loader.getDOMAbstractionLayer().setControlValueById(String(expensesPoundsField), value, null, repeatedIndex + 1);
+                loader.getDOMAbstractionLayer().setControlValueById(String(expensesPoundsFieldId), value, null, repeatedIndex + 1);
           }
         }
 
