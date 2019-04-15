@@ -75,14 +75,17 @@
 
         let code = expensesCodeField.getStringValue() || '';
 
+        console.log('getting code: ' , code);
+
         if(code.length){
           let administrationCodesField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(administrationCodesFieldId),
               administrationCodePrice = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(administrationCodePriceFieldId);
-
+              console.log('setting code: ' , code);
               loader.getDOMAbstractionLayer().setControlValueById(String(administrationCodesFieldId), code, null);
               let value = administrationCodePrice.getStringValue() || '';
   
               loader.getDOMAbstractionLayer().setControlValueById(String(expensesPoundsField), value, null, repeatedIndex + 1);
+              console.log('getting price: ' , value);
         }
 
         calculateAndUpdateTotalHours();
