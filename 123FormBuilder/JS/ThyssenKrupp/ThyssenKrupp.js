@@ -65,17 +65,14 @@
 
         let code = expensesCodeField.getStringValue() || '';
 
-        console.log('getting code: ' , code);
-
         if(code.length){
           let administrationCodesField = loader.getEngine().getDocument().getForm().getElementById(administrationCodesFieldId),
               administrationCodePrice = loader.getEngine().getDocument().getForm().getElementById(administrationCodePriceFieldId);
-              console.log('setting code: ' , code);
+
               loader.getDOMAbstractionLayer().setControlValueById(String(administrationCodesFieldId), code, null);
-              let value = administrationCodePrice.getStringValue() || '';
+              let value = administrationCodePrice.getValue()['value'] || '';
   
               loader.getDOMAbstractionLayer().setControlValueById(String(expensesPoundsField), value, null, repeatedIndex + 1);
-              console.log('getting price: ' , value);
         }
 
         calculateAndUpdateTotalExpenses();
