@@ -71,7 +71,7 @@
     for(var repeatedIndex = 0; repeatedIndex < numberOfRowsToAdd; repeatedIndex++){
       try {
         let expensesCodeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(expensesCodeFieldId, repeatedIndex),
-        expensesPoundsFiel = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(expensesPoundsFieldId, repeatedIndex);
+        expensesPoundsField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(expensesPoundsFieldId, repeatedIndex);
 
         let code = expensesCodeField.getStringValue() || '';
 
@@ -82,7 +82,7 @@
               loader.getDOMAbstractionLayer().setControlValueById(String(hoursWorkedFieldId), code, null);
               let value = administrationCodePrice.getStringValue() || '';
   
-              loader.getDOMAbstractionLayer().setControlValueById(String(administrationCodePriceFieldId), value, null, repeatedIndex + 1);
+              loader.getDOMAbstractionLayer().setControlValueById(String(expensesPoundsField), value, null, repeatedIndex + 1);
         }
 
         calculateAndUpdateTotalHours();
