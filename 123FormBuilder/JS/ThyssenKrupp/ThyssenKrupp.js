@@ -79,7 +79,7 @@
           let administrationCodesField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(administrationCodesFieldId),
               administrationCodePrice = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(administrationCodePriceFieldId);
 
-              loader.getDOMAbstractionLayer().setControlValueById(String(hoursWorkedFieldId), code, null);
+              loader.getDOMAbstractionLayer().setControlValueById(String(administrationCodesFieldId), code, null);
               let value = administrationCodePrice.getStringValue() || '';
   
               loader.getDOMAbstractionLayer().setControlValueById(String(expensesPoundsField), value, null, repeatedIndex + 1);
