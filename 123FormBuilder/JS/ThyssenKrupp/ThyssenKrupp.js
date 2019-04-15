@@ -68,8 +68,8 @@
         console.log('getting code: ' , code);
 
         if(code.length){
-          let administrationCodesField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(administrationCodesFieldId),
-              administrationCodePrice = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(administrationCodePriceFieldId);
+          let administrationCodesField = loader.getEngine().getDocument().getForm().getElementById(administrationCodesFieldId),
+              administrationCodePrice = loader.getEngine().getDocument().getForm().getElementById(administrationCodePriceFieldId);
               console.log('setting code: ' , code);
               loader.getDOMAbstractionLayer().setControlValueById(String(administrationCodesFieldId), code, null);
               let value = administrationCodePrice.getStringValue() || '';
