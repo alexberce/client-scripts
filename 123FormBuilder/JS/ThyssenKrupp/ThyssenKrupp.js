@@ -1,8 +1,6 @@
-console.log('PAUL PAUL PAUL');
-
 (function(){
 
-  console.log('FOR PAUL');
+  console.log('PAUL NU ESTE MINCINOS');
 
   var
       startTimeFieldId = 52566737,
@@ -25,7 +23,6 @@ console.log('PAUL PAUL PAUL');
       /**
        * Utility Fields
        */
-      mileageRateFieldId = 52642922,
 
       mileageRateFieldId = 52642922,
       nightRatePaymentMultiplierFieldId = 52643593,
@@ -33,9 +30,7 @@ console.log('PAUL PAUL PAUL');
       administrationCodePriceFieldId = 52673525,
 
       numberOfRowsToAdd = 15,
-
-      updateIntervalTime = 50;
-      delayTime = 100;
+      updateIntervalTime = 300
   ;
 
   calculateAndUpdateTotalHours();
@@ -43,38 +38,47 @@ console.log('PAUL PAUL PAUL');
   calculateAndUpdateTotalNightRatePayment();
 
   jQuery(window).ready(function(){
-      setTimeout(() => {
-          // loader.getDOMAbstractionLayer().setControlValueById(String(hoursWorkedFieldId), "", new Array(numberOfRowsToAdd - 1).fill(''));
-          jQuery('[data-id="' + topHTMLBlockFieldId + '"] table').eq(0).attr('cellspacing', '0px');
-          
-          setInterval(() => { calculateAndUpdateHoursWorked() }, updateIntervalTime);
-          setInterval(() => { calculateAndUpdateExpenses() }, updateIntervalTime);
-          setInterval(() => { calculateAndUpdateNightRatePayment() }, updateIntervalTime);
+      try {
+          loader.engine.on('compute-form-rules-done', function() {
+              loader.getDOMAbstractionLayer().setControlValueById(String(hoursWorkedFieldId), "", new Array(numberOfRowsToAdd - 1).fill(''));
+              jQuery('[data-id="' + topHTMLBlockFieldId + '"] table').eq(0).attr('cellspacing', '0px');
+              
+              if(window.location.href.indexOf('newPDF') !== -1){
+                  calculateAndUpdateTotalHours();
+                  calculateAndUpdateTotalExpenses();
+                  calculateAndUpdateTotalNightRatePayment();
+              } else {
+                  setInterval(function() { calculateAndUpdateHoursWorked() }, updateIntervalTime);
+                  setInterval(function() { calculateAndUpdateExpenses() }, updateIntervalTime);
+                  setInterval(function() { calculateAndUpdateNightRatePayment() }, updateIntervalTime);
+              }
+          });
+      } catch(e) {
 
-      }, delayTime);
+      }
   });
 
   function calculateAndUpdateExpenses(){
 
       for(var repeatedIndex = 0; repeatedIndex < numberOfRowsToAdd; repeatedIndex++){
           try {
-              let expensesCodeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(expensesCodeFieldId, repeatedIndex),
+              var expensesCodeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(expensesCodeFieldId, repeatedIndex),
                   expensesPoundsField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(expensesPoundsFieldId, repeatedIndex)
                   ;
 
               if(typeof expensesCodeField !== 'undefined' && typeof expensesPoundsField !== 'undefined'){
 
-                  let code = expensesCodeField.getValue()['value'] || '',
+                  var code = expensesCodeField.getValue()['value'] || '',
                   value = null;
 
                   if(code.length){
-                      let administrationCodesField = loader.getEngine().getDocument().getForm().getElementById(administrationCodesFieldId),
+                      var administrationCodesField = loader.getEngine().getDocument().getForm().getElementById(administrationCodesFieldId),
                           administrationCodePriceField = loader.getEngine().getDocument().getForm().getElementById(administrationCodePriceFieldId);
 
-                      let administrationCodes = administrationCodesField.getChoicesValues(),
+                      var administrationCodes = administrationCodesField.getChoicesValues(),
                           administrationCodePrices = administrationCodePriceField.getChoicesValues();
 
-                      let administrationCodePriceFieldValueIndex = findWithAttr(administrationCodes, 'value', code)
+                      var administrationCodePriceFieldValueIndex = findWithAttr(administrationCodes, 'value', code)
 
                       if(administrationCodePriceFieldValueIndex !== -1){
                           value = administrationCodePrices[administrationCodePriceFieldValueIndex]['value'];
@@ -95,15 +99,15 @@ console.log('PAUL PAUL PAUL');
   function calculateAndUpdateHoursWorked(){
       for(var repeatedIndex = 0; repeatedIndex < numberOfRowsToAdd; repeatedIndex++){
           try {
-              let rowStartTimeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(startTimeFieldId, repeatedIndex),
+              var rowStartTimeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(startTimeFieldId, repeatedIndex),
                   rowFinishTimeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(finishTimeFieldId, repeatedIndex),
                   rowHoursWorkedField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(hoursWorkedFieldId, repeatedIndex);
 
-              let startTime = rowStartTimeField.getStringValue() || '',
+              var startTime = rowStartTimeField.getStringValue() || '',
                   finishTime = rowFinishTimeField.getStringValue() || '';
 
               if(startTime.length && finishTime.length){
-                  let value = timeDifference(startTime, finishTime);
+                  var value = timeDifference(startTime, finishTime);
 
                   loader.getDOMAbstractionLayer().setControlValueById(String(hoursWorkedFieldId), value, null, repeatedIndex + 1);
               }
@@ -118,7 +122,7 @@ console.log('PAUL PAUL PAUL');
   function calculateAndUpdateNightRatePayment(){
       for(var repeatedIndex = 0; repeatedIndex < numberOfRowsToAdd; repeatedIndex++){
           try {
-              let rowRadiusMilesField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(radiusMilesFieldId, repeatedIndex),
+              var rowRadiusMilesField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(radiusMilesFieldId, repeatedIndex),
                   rowNightRatePaymentField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(nightRatePaymentFieldId, repeatedIndex),
                   nightRatePaymentMultiplierField = loader.getEngine().getDocument().getForm().getElementById(nightRatePaymentMultiplierFieldId)
                   value = null
@@ -129,7 +133,7 @@ console.log('PAUL PAUL PAUL');
                   && typeof rowNightRatePaymentField !== 'undefined' 
                   && typeof nightRatePaymentMultiplierField !== 'udefined'
               ){
-                  let radiusMiles = rowRadiusMilesField.getValue()['value'] || '',
+                  var radiusMiles = rowRadiusMilesField.getValue()['value'] || '',
                       nightRatePaymentMultiplier = nightRatePaymentMultiplierField.getValue()['value'] || 1;
                   
                       if(radiusMiles){
@@ -146,10 +150,10 @@ console.log('PAUL PAUL PAUL');
   }
 
   function calculateAndUpdateTotalHours(){
-      let totalHours = 0, totalMinutes = 0;
+      var totalHours = 0, totalMinutes = 0;
 
-      jQuery('[data-id="' + hoursWorkedFieldId + '"] [data-role="i123-input"]').each((index, item) => {
-          let value = jQuery(item).val(),
+      jQuery('[data-id="' + hoursWorkedFieldId + '"] [data-role="i123-input"]').each(function(index, item){
+          var value = jQuery(item).val(),
               valueSplit = value.split(':'),
               hours = Number(valueSplit[0]) || 0,
               minutes = Number(valueSplit[1]) || 0;
@@ -158,7 +162,7 @@ console.log('PAUL PAUL PAUL');
           totalMinutes += ~~(minutes);
       });
 
-      let minutesToHours = totalMinutes / 60,
+      var minutesToHours = totalMinutes / 60,
           minutesLeft = totalMinutes % 60;
 
       totalHours += ~~(minutesToHours);
@@ -168,27 +172,27 @@ console.log('PAUL PAUL PAUL');
   }
 
   function calculateAndUpdateTotalExpenses(){
-      let valueArray = priceCalculator(expensesPoundsFieldId);
+      var valueArray = priceCalculator(expensesPoundsFieldId);
 
       jQuery('[data-id="' + bottomHTMLBlockFieldId + '"] td:nth-child(3) span').text(String(zeroPad(valueArray[0], 3)) + '.' + String(zeroPad(valueArray[1], 2, 'after')));
   }
 
   function calculateAndUpdateTotalNightRatePayment(){
-      let valueArray = priceCalculator(nightRatePaymentFieldId);
+      var valueArray = priceCalculator(nightRatePaymentFieldId);
 
       jQuery('[data-id="' + bottomHTMLBlockFieldId + '"] td:nth-child(6) span').text(String(zeroPad(valueArray[0], 3)) + '.' + String(zeroPad(valueArray[1], 2, 'after')));
   }
 
   function priceCalculator(fieldId){
-      let totalValue = 0;
+      var totalValue = 0;
 
-      jQuery('[data-id="' + fieldId + '"] [data-role="i123-input"]').each((index, item) => {
-          let value = jQuery(item).val();
+      jQuery('[data-id="' + fieldId + '"] [data-role="i123-input"]').each(function(index, item) {
+          var value = jQuery(item).val();
 
           totalValue += Number(value);
       });
 
-      let valueSplit = String(totalValue).split('.'),
+      var valueSplit = String(totalValue).split('.'),
           totalValueInt = valueSplit[0] || 0,
           totalValueAfterDot = valueSplit[1] || 0;
 
