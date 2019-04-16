@@ -1,7 +1,4 @@
 (function(){
-
-  console.log('PAUL NU ESTE MINCINOS');
-
   var
       startTimeFieldId = 52566737,
       finishTimeFieldId = 52566732,
