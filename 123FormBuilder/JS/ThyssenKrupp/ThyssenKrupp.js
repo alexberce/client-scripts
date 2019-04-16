@@ -1,3 +1,5 @@
+console.log('PAUL PAUL PAUL');
+
 (function(){
 
   console.log('FOR PAUL');
