@@ -1,5 +1,7 @@
 (function(){
 
+  console.log('FOR PAUL');
+
   var
       startTimeFieldId = 52566737,
       finishTimeFieldId = 52566732,
@@ -30,8 +32,8 @@
 
       numberOfRowsToAdd = 15,
 
-      updateIntervalTime = 100;
-      delayTime = 1000;
+      updateIntervalTime = 50;
+      delayTime = 100;
   ;
 
   calculateAndUpdateTotalHours();
@@ -82,7 +84,7 @@
 
               calculateAndUpdateTotalExpenses();
           } catch (e) {
-              console.log('Expenses calculator error: ' + e.message);
+              // console.log('Expenses calculator error: ' + e.message);
           }
       }
 
@@ -136,7 +138,7 @@
               loader.getDOMAbstractionLayer().setControlValueById(String(nightRatePaymentFieldId), value, null, repeatedIndex + 1);
               calculateAndUpdateTotalNightRatePayment();
           } catch (e) {
-              console.log('Night rate payment calculator error:' + e.message)
+              // console.log('Night rate payment calculator error:' + e.message)
           }
       }
   }
