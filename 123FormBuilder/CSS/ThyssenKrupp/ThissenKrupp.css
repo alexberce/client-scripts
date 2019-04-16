@@ -72,6 +72,7 @@
     padding: 0 !important; 
 }
 
+#form [data-type-id="90004"] input[data-role="i123-input"],
 #form [data-type-id="90004"] [data-ui-role="ui-element"][data-type="dropdown"],
 #form [data-type-id="90004"] [data-ui-role="ui-element"][data-type="date"],
 #form [data-type-id="90004"] [data-ui-role="ui-element"][data-type="time"] {
