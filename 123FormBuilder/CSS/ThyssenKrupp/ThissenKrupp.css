@@ -72,10 +72,14 @@
     padding: 0 !important; 
 }
 
-#form [data-type-id="90004"] input[data-role="i123-input"],
+#form [data-type-id="90004"] [data-ui-role="ui-element"][data-type="dropdown"],
 #form [data-type-id="90004"] [data-ui-role="ui-element"][data-type="date"],
 #form [data-type-id="90004"] [data-ui-role="ui-element"][data-type="time"] {
     width: 100% !important;
+}
+
+#form [data-type-id="90004"] input[data-role="i123-input"][readonly] {
+    background: #eee !important;
 }
 
 #form [data-type-id="90004"] div[data-ui-role=ui-element][data-type=date]>div[data-role=expander]:after, 
