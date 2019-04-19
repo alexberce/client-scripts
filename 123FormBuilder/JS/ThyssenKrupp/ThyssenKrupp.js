@@ -22,7 +22,6 @@
        */
 
       mileageRateFieldId = 52642922,
-      nightRatePaymentMultiplierFieldId = 52643593,
       administrationCodesFieldId = 52643094,
       administrationCodePriceFieldId = 52673525,
 
@@ -121,20 +120,20 @@
           try {
               var rowRadiusMilesField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(radiusMilesFieldId, repeatedIndex),
                   rowNightRatePaymentField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(nightRatePaymentFieldId, repeatedIndex),
-                  nightRatePaymentMultiplierField = loader.getEngine().getDocument().getForm().getElementById(nightRatePaymentMultiplierFieldId)
+                  mileageRateField = loader.getEngine().getDocument().getForm().getElementById(mileageRateFieldId)
                   value = null
                   ;
 
               if(
                   typeof rowRadiusMilesField !== 'undefined' 
                   && typeof rowNightRatePaymentField !== 'undefined' 
-                  && typeof nightRatePaymentMultiplierField !== 'udefined'
+                  && typeof mileageRateField !== 'udefined'
               ){
                   var radiusMiles = rowRadiusMilesField.getValue()['value'] || '',
-                      nightRatePaymentMultiplier = nightRatePaymentMultiplierField.getValue()['value'] || 1;
+                  mileageRate = mileageRateField.getValue()['value'] || 1;
                   
                       if(radiusMiles){
-                          value = Number(radiusMiles) * Number(nightRatePaymentMultiplier);
+                          value = Number(radiusMiles) * Number(mileageRate);
                       }
               }
 
