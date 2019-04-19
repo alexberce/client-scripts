@@ -164,19 +164,19 @@
       totalHours += ~~(minutesToHours);
       totalMinutes = minutesLeft;
 
-      jQuery('[data-id="' + bottomHTMLBlockFieldId + '"] td:nth-child(2) span').text(String(zeroPad(totalHours, 2)) + ':' + String(zeroPad(totalMinutes, 2)));
+      jQuery('[data-id="' + bottomHTMLBlockFieldId + '"] td:nth-child(2) span').last().text(String(zeroPad(totalHours, 2)) + ':' + String(zeroPad(totalMinutes, 2)));
   }
 
   function calculateAndUpdateTotalExpenses(){
       var valueArray = priceCalculator(expensesPoundsFieldId);
 
-      jQuery('[data-id="' + bottomHTMLBlockFieldId + '"] td:nth-child(3) span').text(String(zeroPad(valueArray[0], 3)) + '.' + String(zeroPad(valueArray[1], 2, 'after')));
+      jQuery('[data-id="' + bottomHTMLBlockFieldId + '"] td:nth-child(3) span').last().text(String(zeroPad(valueArray[0], 3)) + '.' + String(zeroPad(valueArray[1], 2, 'after')));
   }
 
   function calculateAndUpdateTotalNightRatePayment(){
       var valueArray = priceCalculator(nightRatePaymentFieldId);
 
-      jQuery('[data-id="' + bottomHTMLBlockFieldId + '"] td:nth-child(6) span').text(String(zeroPad(valueArray[0], 3)) + '.' + String(zeroPad(valueArray[1], 2, 'after')));
+      jQuery('[data-id="' + bottomHTMLBlockFieldId + '"] td:nth-child(6) span').last().text(String(zeroPad(valueArray[0], 3)) + '.' + String(zeroPad(valueArray[1], 2, 'after')));
   }
 
   function priceCalculator(fieldId){
