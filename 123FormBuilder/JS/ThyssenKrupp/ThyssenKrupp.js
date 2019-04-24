@@ -44,7 +44,7 @@
                   calculateAndUpdateTotalHours();
                   calculateAndUpdateTotalExpenses();
                   calculateAndUpdateTotalNightRatePayment();
-                }, 30);
+                }, 60);
               } else {
                   setInterval(function() { calculateAndUpdateHoursWorked() }, updateIntervalTime);
                   setInterval(function() { calculateAndUpdateExpenses() }, updateIntervalTime);
