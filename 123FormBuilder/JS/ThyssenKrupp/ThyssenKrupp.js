@@ -40,10 +40,11 @@
               
               if(window.location.href.indexOf('newPDF') !== -1){
                 setTimeout(function(){
+                  console.log('CALCULATIONS');
                   calculateAndUpdateTotalHours();
                   calculateAndUpdateTotalExpenses();
                   calculateAndUpdateTotalNightRatePayment();
-                }, 60);
+                }, 80);
               } else {
                   loader.getDOMAbstractionLayer().setControlValueById(String(hoursWorkedFieldId), "", new Array(numberOfRowsToAdd - 1).fill(''));
                   setInterval(function() { calculateAndUpdateHoursWorked() }, updateIntervalTime);
