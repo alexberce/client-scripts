@@ -40,6 +40,8 @@
               
               if(window.location.href.indexOf('newPDF') !== -1){
                 setTimeout(function(){
+                  jQuery('#0000000d_0').trigger('change');
+                  jQuery('#00000013_0').trigger('change');
                   console.log('CALCULATIONS');
                   calculateAndUpdateTotalHours();
                   calculateAndUpdateTotalExpenses();
