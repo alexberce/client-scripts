@@ -40,9 +40,11 @@
               jQuery('[data-id="' + topHTMLBlockFieldId + '"] table').eq(0).attr('cellspacing', '0px');
               
               if(window.location.href.indexOf('newPDF') !== -1){
+                setTimeout(function(){
                   calculateAndUpdateTotalHours();
                   calculateAndUpdateTotalExpenses();
                   calculateAndUpdateTotalNightRatePayment();
+                }, 30);
               } else {
                   setInterval(function() { calculateAndUpdateHoursWorked() }, updateIntervalTime);
                   setInterval(function() { calculateAndUpdateExpenses() }, updateIntervalTime);
