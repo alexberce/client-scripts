@@ -36,7 +36,6 @@
   jQuery(window).ready(function(){
       try {
           loader.engine.on('compute-form-rules-done', function() {
-              loader.getDOMAbstractionLayer().setControlValueById(String(hoursWorkedFieldId), "", new Array(numberOfRowsToAdd - 1).fill(''));
               jQuery('[data-id="' + topHTMLBlockFieldId + '"] table').eq(0).attr('cellspacing', '0px');
               
               if(window.location.href.indexOf('newPDF') !== -1){
@@ -46,6 +45,7 @@
                   calculateAndUpdateTotalNightRatePayment();
                 }, 60);
               } else {
+                  loader.getDOMAbstractionLayer().setControlValueById(String(hoursWorkedFieldId), "", new Array(numberOfRowsToAdd - 1).fill(''));
                   setInterval(function() { calculateAndUpdateHoursWorked() }, updateIntervalTime);
                   setInterval(function() { calculateAndUpdateExpenses() }, updateIntervalTime);
                   setInterval(function() { calculateAndUpdateNightRatePayment() }, updateIntervalTime);
