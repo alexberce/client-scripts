@@ -25,7 +25,7 @@
       administrationCodesFieldId = 52643094,
       administrationCodePriceFieldId = 52673525,
 
-      numberOfRowsToAdd = 15,
+      numberOfRowsToAdd = 10,
       updateIntervalTime = 300
   ;
 
