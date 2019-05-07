@@ -1,6 +1,7 @@
 :root {
 	--first-table-container-id: "435145";
-	--last-table-container-id: "435155";
+    --last-table-container-id: "435155";
+    --administration-codes-table-container-id: "435157";
 }
 
 [data-type="repeatable-group"]:not(:first-of-type) [data-id="435145"],
