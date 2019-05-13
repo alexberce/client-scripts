@@ -35,7 +35,7 @@
   
 	jQuery(window).ready(function(){
 		try {
-			loader.engine.on('compute-form-rules-done', function() {
+			loader.engine.on('theme-ready', function() {
 				jQuery('[data-id="' + topHTMLBlockFieldId + '"] table').eq(0).attr('cellspacing', '0px');
 				
 				if(window.location.href.indexOf('newPDF') !== -1){
