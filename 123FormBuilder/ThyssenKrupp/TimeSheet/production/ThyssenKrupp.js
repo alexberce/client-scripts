@@ -121,7 +121,7 @@
 				var rowStartTimeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(startTimeFieldId, repeatedIndex),
                     rowFinishTimeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(finishTimeFieldId, repeatedIndex),
 				
-				var startTime = rowStartTimeField.getStringValue() || '',
+				 	startTime = rowStartTimeField.getStringValue() || '',
 				    finishTime = rowFinishTimeField.getStringValue() || '';
 				
 				if(startTime.length && finishTime.length){
