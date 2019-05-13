@@ -40,7 +40,7 @@
 	function waitForLoader(){
 		if(typeof loader !== "undefined" && loader.engine !== "undefined"){
 			try {
-				loader.engine.on('compute-form-rules-done', function() {
+				loader.engine.on('theme-ready', function() {
 					jQuery('[data-id="' + topHTMLBlockFieldId + '"] table').eq(0).attr('cellspacing', '0px');
 					
 					if(
@@ -52,12 +52,14 @@
 					}
 					
 					if(window.location.href.indexOf('newPDF') !== -1){
+                    	loader.engine.on('compute-form-rules-done', function() {
 						setTimeout(function(){
 							console.log('CALCULATIONS');
 							calculateAndUpdateTotalHours();
 							calculateAndUpdateTotalExpenses();
 							calculateAndUpdateTotalNightRatePayment();
 						}, 80);
+                    });
 					} else {
 						loader.getDOMAbstractionLayer().setControlValueById(String(hoursWorkedFieldId), "", new Array(numberOfRowsToAdd - 1).fill(''));
 						
@@ -95,10 +97,10 @@
 						var administrationCodes = administrationCodesField.getChoicesValues(),
 						    administrationCodePrices = administrationCodePriceField.getChoicesValues();
 						
-						var administrationCodePriceFieldValueIndex = findWithAttr(administrationCodes, 'value', code)
+                        var administrationCodePriceFieldValueIndex = findWithAttr(administrationCodes, 'text', String(code));
 						
 						if(administrationCodePriceFieldValueIndex !== -1){
-							value = administrationCodePrices[administrationCodePriceFieldValueIndex]['value'];
+                            value = Number(administrationCodePrices[administrationCodePriceFieldValueIndex]['text']) || 0;
 						}
 					}
 					
@@ -117,7 +119,7 @@
 		for(var repeatedIndex = 0; repeatedIndex < numberOfRowsToAdd; repeatedIndex++){
 			try {
 				var rowStartTimeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(startTimeFieldId, repeatedIndex),
-				    rowFinishTimeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(finishTimeFieldId, repeatedIndex);
+                    rowFinishTimeField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(finishTimeFieldId, repeatedIndex),
 				
 				var startTime = rowStartTimeField.getStringValue() || '',
 				    finishTime = rowFinishTimeField.getStringValue() || '';
@@ -140,7 +142,7 @@
 			try {
 				var rowRadiusMilesField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(radiusMilesFieldId, repeatedIndex),
 				    rowNightRatePaymentField = loader.getEngine().getDocument().getForm().getElementByIdAndRepeatedPath(nightRatePaymentFieldId, repeatedIndex),
-				    mileageRateField = loader.getEngine().getDocument().getForm().getElementById(mileageRateFieldId)
+                    mileageRateField = loader.getEngine().getDocument().getForm().getElementById(mileageRateFieldId);
 				value = null
 				;
 				
@@ -229,6 +231,7 @@
 			case 'before':
 			default:
 				return Array(+(zero > 0 && zero)).join("0") + num;
+                break;
 		}
 	}
 	
