@@ -34,32 +34,48 @@
     calculateAndUpdateTotalNightRatePayment();
 
     jQuery(window).ready(function(){
-        try {
-            loader.engine.on('theme-ready', function() {
-                jQuery('[data-id="' + topHTMLBlockFieldId + '"] table').eq(0).attr('cellspacing', '0px');
-
-                if(window.location.href.indexOf('newPDF') !== -1){
-                    loader.engine.on('compute-form-rules-done', function() {
-                        setTimeout(function(){
-                            jQuery('#0000000d_0').trigger('change');
-                            jQuery('#00000013_0').trigger('change');
-                            console.log('CALCULATIONS');
-                            calculateAndUpdateTotalHours();
-                            calculateAndUpdateTotalExpenses();
-                            calculateAndUpdateTotalNightRatePayment();
-                        }, 80);
+		waitForLoader();
+	});
+	
+	function waitForLoader(){
+		if(typeof loader !== "undefined" && loader.engine !== "undefined"){
+			try {
+				loader.engine.on('theme-ready', function() {
+					jQuery('[data-id="' + topHTMLBlockFieldId + '"] table').eq(0).attr('cellspacing', '0px');
+					
+					if(
+						window.location.href.indexOf('newPDF') !== -1
+						|| window.location.href.indexOf('editbyowner') !== -1
+					){
+						jQuery('#0000000b_0').trigger('change');
+						jQuery('#00000011_0').trigger('change');
+					}
+					
+					if(window.location.href.indexOf('newPDF') !== -1){
+                    	loader.engine.on('compute-form-rules-done', function() {
+						setTimeout(function(){
+							console.log('CALCULATIONS');
+							calculateAndUpdateTotalHours();
+							calculateAndUpdateTotalExpenses();
+							calculateAndUpdateTotalNightRatePayment();
+						}, 80);
                     });
-                } else {
-                    loader.getDOMAbstractionLayer().setControlValueById(String(hoursWorkedFieldId), "", new Array(numberOfRowsToAdd - 1).fill(''));
-                    setInterval(function() { calculateAndUpdateHoursWorked() }, updateIntervalTime);
-                    setInterval(function() { calculateAndUpdateExpenses() }, updateIntervalTime);
-                    setInterval(function() { calculateAndUpdateNightRatePayment() }, updateIntervalTime);
-                }
-            });
-        } catch(e) {
-
-        }
-    });
+					} else {
+						loader.getDOMAbstractionLayer().setControlValueById(String(hoursWorkedFieldId), "", new Array(numberOfRowsToAdd - 1).fill(''));
+						
+						setInterval(function() { calculateAndUpdateHoursWorked() }, updateIntervalTime);
+						setInterval(function() { calculateAndUpdateExpenses() }, updateIntervalTime);
+						setInterval(function() { calculateAndUpdateNightRatePayment() }, updateIntervalTime);
+					}
+				});
+			} catch(e) {
+				console.log('ERROR FROM CUSTOM SCRIPT: ' + e.message);
+			}
+		}
+		else{
+			setTimeout(waitForLoader, 20);
+		}
+	}
 
     function calculateAndUpdateExpenses(){
 
