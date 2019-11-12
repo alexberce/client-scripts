@@ -7,6 +7,8 @@ if (window.addEventListener) {
 function receiveMessage(event) {
   const { action } = event.data;
   const messageData = event.data;
+  
+  console.log(event);
 
   switch (action) {
     case "setFieldValue":
